@@ -1,0 +1,24 @@
+<html>
+    <head>
+        
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    </head>
+    <body>
+        <h1>Welcome To GetItDone</h1>
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+        <h3> Register </h4>
+        <form action='' method = "POST">
+            <p><b>Full Name: </b> <input type = "text" name = "fullname" /></p>
+            <p><b>Email Id: </b> <input type = "email" name = "emailid" /></p>
+            <p><b>Mobile No: </b> <input type = "text" name = "mobileno" /></p>
+            <p><b>Password: </b> <input type = "password" name = "password" /></p>
+            <p><input type = "submit" value = "Submit" /></p>
+            <br/>
+            <p> If Already registered, Please login <a href="http://127.0.0.1:5000/login">Login</a></p>
+        </form>
+    </body>
+</html>
+

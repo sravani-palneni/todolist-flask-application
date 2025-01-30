@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="http://127.0.0.1:5000/home">Home</a>
+            <a href="http://127.0.0.1:5000/add">New Task</a>
+            <a class="active" href="http://127.0.0.1:5000/profile">Profile</a>
+            <a href="http://127.0.0.1:5000/logout">Logout</a>
+        </div>
+
+        <h3> Update Your Details </h4>  
+        <form action='' method = "POST">
+            <p><b>Full Name: </b> <input type = "text" name = "fullname" value="{{user.full_name}}" /> </p>
+            <p><b>Email Id: </b> <input type = "text" name = "emailid" value="{{user.email_id}}" /> </p>
+            <p><b>Mobile No: </b> <input type = "integer" name = "mobileno" value="{{user.mobile_no}}" /></p>
+            <p><input type = "submit" value = "Update" /></p>
+        </form>          
+    </body>
+</html>
+

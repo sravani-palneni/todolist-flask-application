@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My TaskBoard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <h1>My TaskBoard</h1>
+        <div class="topnav">
+            <a class="active" href="">Home</a>
+            <a href="http://127.0.0.1:5000/add">New Task</a>
+            <a href="http://127.0.0.1:5000/profile">Profile</a>
+            <a href="http://127.0.0.1:5000/logout">Logout</a>
+        </div>
+
+        <form method="POST" action='http://127.0.0.1:5000/tasks/search'>
+            <input type="text" id="search-term" name="search-term" placeholder="Search">
+            <button type="submit">Search</button>
+        </form>
+
+        <h3>Your Tasks</h3>
+        <table>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th></th>
+            </tr>
+            {% for task in tasks %}
+            {% if task.status == False %}
+                <tr>
+                    <td>
+                        <form action='http://127.0.0.1:5000/update/{{task.task_id}}' method = "POST" id="update-form-{{task.task_id}}">
+                            <input type="radio" name="status" onclick="document.getElementById('update-form-{{task.task_id}}').submit();" />
+                        </form>
+                    </td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.category }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>
+                        <form action='http://127.0.0.1:5000/delete/{{task.task_id}}' method = "POST">
+                            <input type = "submit" value = "Delete" />
+                        </form>
+                </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+
+        <button id="completed-button" onClick="showCompletedTasks()">Show Completed Tasks</button>
+        <div id="completed-tasks" style="display:none;">
+            <h3>Completed Tasks</h3>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th></th>
+                </tr>
+                {% for task in tasks %}
+                {% if task.status == True %}
+                    <tr>
+                        <td></td>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.category }}</td>
+                        <td>{{ task.priority }}</td>
+                        <td>{{ task.due_date }}</td>
+                        <td>
+                            <form action='http://127.0.0.1:5000/delete/{{task.task_id}}' method = "POST">
+                                <input type = "submit" value = "Delete" />
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
+        <script>
+            function showCompletedTasks() {
+                var completedTasks = document.getElementById('completed-tasks');
+                var completedButton = document.getElementById('completed-button');
+
+                if (completedTasks.style.display === 'none') {
+                    completedTasks.style.display = 'block';
+                    completedButton.textContent = 'Hide Completed Tasks'; 
+                } else {
+                    completedTasks.style.display = 'none';
+                    completedButton.textContent = 'Show Completed Tasks'; 
+                }
+            }
+        </script>
+    </body>
+</html>

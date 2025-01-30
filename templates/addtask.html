@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="http://127.0.0.1:5000/home">Home</a>
+            <a class="active" href="http://127.0.0.1:5000/add">New Task</a>
+            <a href="http://127.0.0.1:5000/profile">Profile</a>
+            <a href="http://127.0.0.1:5000/logout">Logout</a>
+        </div>
+        <h3> Add New Task </h4>
+        <form action='http://127.0.0.1:5000/add' method = "POST">
+            <p><b>Title</b> <input type = "text" name = "title" /></p>
+            <p><b><label for="category">Category</label></b>
+                 <select name="category" id="category">
+                   <option value="Personal"> Personal </option>
+                   <option value="Study"> Study </option>
+                   <option value="Work"> Work </option>
+                   <option value="Grocery"> Grocery </option>
+                   <option value="Payments"> Payments </option>
+                 </select></p>
+            <p><b><label for="priority">Priority</label></b>
+                 <select name="priority" id="priority">
+                     <option value="Low"> Low </option>
+                     <option value="Medium"> Medium </option>
+                     <option value="High"> High </option>
+                 </select></p>
+            <p><b>Due Date</b> <input type = "date" name = "duedate" /></p>
+            <p><input type = "submit" value = "Add" /></p>
+         </form>
+         </div>
+    </body>
+</html>
